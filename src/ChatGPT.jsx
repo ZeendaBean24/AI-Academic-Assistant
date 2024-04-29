@@ -17,7 +17,7 @@ const ChatGPT = () => {
       max_tokens: 150
     }, {
       headers: {
-        'Authorization': `Bearer YOUR_API_KEY_HERE`
+        'Authorization': `Bearer ${import.meta.env.VITE_API_KEY}`
       }
     });
     setResponses([...responses, response.data.choices[0].text]);
