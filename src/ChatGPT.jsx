@@ -1,42 +1,55 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
+export default function ChatGPT() {
+  const [prompt, setPrompt] = useState("");
+  const [response, setResponse] = useState("");
+  const HTTP = "http://localhost:8080/chat";
 
-const ChatGPT = () => {
-  const [input, setInput] = useState('');
-  const [responses, setResponses] = useState([]);
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  const handleInputChange = (event) => {
-    setInput(event.target.value);
+    axios
+      .post(`${HTTP}`, { prompt })
+      .then((res) => {
+        setResponse(res.data);
+        console.log(prompt);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    setPrompt("");
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    if (!input.trim()) return;
-    const response = await axios.post('https://api.openai.com/v1/engines/text-davinci-003/completions', {
-      prompt: input,
-      max_tokens: 150
-    }, {
-      headers: {
-        'Authorization': `Bearer ${import.meta.env.VITE_API_KEY}`
-      }
-    });
-    setResponses([...responses, response.data.choices[0].text]);
-    setInput('');
+  const handlePrompt = (e) => {
+    setPrompt(e.target.value);
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input type="text" value={input} onChange={handleInputChange} />
-        <button type="submit">Send</button>
+    <div className="container container-sm p-1">
+      {" "}
+      <h1 className="title text-center text-darkGreen">ChatGPT API</h1>
+      <form className="form" onSubmit={handleSubmit}>
+        <div className="form-group">
+          <a href="">Link</a>
+          <label htmlFor="">Ask questions</label>
+          <input
+            className="shadow-sm"
+            type="text"
+            placeholder="Enter text"
+            value={prompt}
+            onChange={handlePrompt}
+          />
+        </div>{" "}
+        {/* <button className="btn btn-accept w-100" type="submit">
+          Go
+        </button> */}
       </form>
-      <div>
-        {responses.map((res, index) => (
-          <p key={index}>{res}</p>
-        ))}
+      <div className="bg-darkGreen  mt-2 p-1 border-5">
+        <p className="text-light">
+          {response ? response : "Ask me anything..."}
+        </p>
       </div>
     </div>
   );
-};
-
-export default ChatGPT;
+}
