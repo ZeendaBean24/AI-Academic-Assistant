@@ -20,6 +20,10 @@ app.http('getAIResponse', {
               {"role": "user", "content": `Write an analysis based on the description of my dream: "${inputText}"`}
             ]
           });
+
+        return {
+            jsonBody: {analysis: completion.choices[0].message.content}
+        }
     },
 });
 
