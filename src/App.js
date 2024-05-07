@@ -12,7 +12,7 @@ function App() {
       inputText: inputText
     }
 
-    const result = await fetch("/api/ai", {
+    const result = await fetch("http://localhost:7071/api/ai", {
       method: "POST",
       headers: {
           "Content-Type": "application/json",
