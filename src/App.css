@@ -2,7 +2,7 @@
   max-width: auto;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
+  text-align: left;
 }
 
 /* App.css */
@@ -11,6 +11,10 @@
   display: flex;
   width: 100vw;
   height: 100vh; /* Adjust the height as needed */
+}
+
+.left-title {
+  text-align: center;
 }
 
 .left-side {

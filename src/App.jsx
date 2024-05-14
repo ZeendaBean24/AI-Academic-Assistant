@@ -11,13 +11,48 @@ const App = () => {
     return (
         <div className="container">
             <div className="left-side">
-                <h2>AI Prompt Wiki</h2>
+                <h2 className="left-title">AI Prompt Wiki</h2>
                 <div>
                     <button onClick={toggleDropdown}>
                         {isOpen ? 'Hide Categories' : 'Show Categories'}
                     </button>
                     {isOpen && (
                         <div>
+                            <h3>Creating Quizzes</h3>
+                            <ul>
+                                <li>Prompt 1: How to create a simple quiz</li>
+                                <li>Prompt 2: Tips for effective quiz questions</li>
+                            </ul>
+                            <h3>Creating Quizzes</h3>
+                            <ul>
+                                <li>Prompt 1: How to create a simple quiz</li>
+                                <li>Prompt 2: Tips for effective quiz questions</li>
+                            </ul>
+                            <h3>Creating Quizzes</h3>
+                            <ul>
+                                <li>Prompt 1: How to create a simple quiz</li>
+                                <li>Prompt 2: Tips for effective quiz questions</li>
+                            </ul>
+                            <h3>Creating Quizzes</h3>
+                            <ul>
+                                <li>Prompt 1: How to create a simple quiz</li>
+                                <li>Prompt 2: Tips for effective quiz questions</li>
+                            </ul>
+                            <h3>Creating Quizzes</h3>
+                            <ul>
+                                <li>Prompt 1: How to create a simple quiz</li>
+                                <li>Prompt 2: Tips for effective quiz questions</li>
+                            </ul>
+                            <h3>Creating Quizzes</h3>
+                            <ul>
+                                <li>Prompt 1: How to create a simple quiz</li>
+                                <li>Prompt 2: Tips for effective quiz questions</li>
+                            </ul>
+                            <h3>Creating Quizzes</h3>
+                            <ul>
+                                <li>Prompt 1: How to create a simple quiz</li>
+                                <li>Prompt 2: Tips for effective quiz questions</li>
+                            </ul>
                             <h3>Creating Quizzes</h3>
                             <ul>
                                 <li>Prompt 1: How to create a simple quiz</li>
