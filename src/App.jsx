@@ -76,15 +76,15 @@ const App = () => {
     return (
       <div className="container">
         <div className="left-side">
-          <h2 className='left-title'>AI Prompt Wiki</h2>
+          <h2 className='title'>AI Prompt Wiki</h2>
           {Object.keys(categories).map((category) => (
               <div key={category}>
-                  <button onClick={() => toggleCategory(category)}>
+                  <button className="category-dropdown" onClick={() => toggleCategory(category)}>
                       {categories[category] ? `Hide ${category}` : `Show ${category}`}
                   </button>
                   {categories[category] && (
                       <div>
-                          <h3>{category} Prompts</h3>
+                          <h3 className='prompt-category-text'>{category} Prompts</h3>
                           {prompts.filter(p => p.category === category).map((prompt) => (
                               <div
                                   key={prompt.id}
@@ -109,7 +109,7 @@ const App = () => {
               <div className="bottom-part">
                   <h2 className='title'>Customize Your Prompt</h2>
                   <div>{renderPromptWithInputs()}</div>
-                  <button onClick={copyPrompt}>Copy Prompt</button>
+                  <button className="copy-button" onClick={copyPrompt}>Copy Prompt</button>
                   {alertVisible && <div className="alert">Please fill in all required fields.</div>}
               </div>
           </div>
