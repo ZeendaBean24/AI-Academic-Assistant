@@ -7,7 +7,7 @@ const App = () => {
     const [editableParts, setEditableParts] = useState({});
 
     const toggleDropdown = () => {
-        setIsOpen(!isOpen);
+      setIsOpen(!isOpen);
     };
 
     const prompts = [
@@ -25,38 +25,44 @@ const App = () => {
       setEditableParts(parts);
     };
 
-    const handleInputChange = (key, value) => {
-      setEditableParts(prev => ({ ...prev, [key]: value }));
+    const renderPrompt = (prompt) => {
+      return prompt.replace(/<([^>]+)>/g, (match, p1) => (
+          `<input class="editable-part" type="text" placeholder="Enter ${p1}" />`
+      ));
     };
 
     return (
       <div className="container">
-      <div className="left-side">
-          <h2>AI Prompt Wiki</h2>
-          {prompts.map((prompt) => (
-              <div key={prompt.id} onClick={() => handlePromptClick(prompt)}>
-                  {prompt.text}
+          <div className="left-side">
+              <h2 className='left-title'>AI Prompt Wiki</h2>
+              <button onClick={toggleDropdown}>
+                  {isOpen ? 'Hide Categories' : 'Show Categories'}
+              </button>
+              {isOpen && (
+                  <div>
+                      <h3>Creating Quizzes</h3>
+                      {prompts.map((prompt) => (
+                          <div
+                              key={prompt.id}
+                              className="prompt-item"
+                              onClick={() => handlePromptClick(prompt)}
+                          >
+                              {prompt.text}
+                          </div>
+                      ))}
+                  </div>
+              )}
+          </div>
+          <div className="right-side">
+              <div className="top-part">
+                  {/* Other content */}
               </div>
-          ))}
-      </div>
-      <div className="right-side">
-          <div className="top-part">
-              {/* Other content */}
-          </div>
-          <div className="bottom-part">
-              <h3>Customize Your Prompt</h3>
-              {Object.keys(editableParts).map(key => (
-                  <input
-                      key={key}
-                      type="text"
-                      value={editableParts[key]}
-                      onChange={(e) => handleInputChange(key, e.target.value)}
-                      placeholder={`Enter ${editableParts[key]}`}
-                  />
-              ))}
+              <div className="bottom-part">
+                  <h3>Customize Your Prompt</h3>
+                  <p dangerouslySetInnerHTML={{ __html: renderPrompt(selectedPrompt) }} />
+              </div>
           </div>
       </div>
-  </div>
     );
 };
 
