@@ -70,7 +70,7 @@ const App = () => {
           completedPrompt = completedPrompt.replace(key, editableParts[key]);
       });
       navigator.clipboard.writeText(completedPrompt);
-      setCopiedPrompts(prev => [completedPrompt, ...prev.slice(0, 2)]);
+      setCopiedPrompts(prev => [completedPrompt, ...prev.slice(0, 19)]);
     };
 
     return (
@@ -100,18 +100,22 @@ const App = () => {
           ))}
         </div>
           <div className="right-side">
-              <div className="top-part">
-                    <h2 className='title'>Recently Copied Prompts</h2>
+            <div className="top-part">
+                <h2 className='title'>Recently Copied Prompts</h2>
+                <ol>
                     {copiedPrompts.map((prompt, index) => (
-                        <div key={index} className="copied-prompt">{prompt}</div>
+                        <li key={index} className={`copied-prompt ${index === 0 ? 'most-recent' : ''}`}>
+                            {prompt}
+                        </li>
                     ))}
-              </div>
-              <div className="bottom-part">
-                  <h2 className='title'>Customize Your Prompt</h2>
-                  <div>{renderPromptWithInputs()}</div>
-                  <button className="copy-button" onClick={copyPrompt}>Copy Prompt</button>
-                  {alertVisible && <div className="alert">Please fill in all required fields.</div>}
-              </div>
+                </ol>
+            </div>
+            <div className="bottom-part">
+                <h2 className='title'>Customize Your Prompt</h2>
+                <div>{renderPromptWithInputs()}</div>
+                <button className="copy-button" onClick={copyPrompt}>Copy Prompt</button>
+                {alertVisible && <div className="alert">Please fill in all required fields.</div>}
+            </div>
           </div>
       </div>
     );

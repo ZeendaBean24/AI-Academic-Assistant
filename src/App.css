@@ -72,3 +72,18 @@ input.editable-part {
 .prompt-category-text {
   margin: 5px 0;
 }
+
+.copied-prompt {
+  padding: 5px;
+  border-bottom: 1px solid #ccc;
+}
+
+.copied-prompt:first-child {
+  font-weight: bold;
+}
+
+.copied-prompt:first-child::before {
+  content: 'Most Recent - ';
+  font-weight: bold;
+  color: red;
+}
