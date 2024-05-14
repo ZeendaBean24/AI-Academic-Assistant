@@ -1,18 +1,37 @@
-import React from "react";
+import React, { useState } from 'react';
+import './App.css';
 
-function App() {
-  return (
-    <div style={{ display: "flex", height: "100vh" }}>
-      <div style={{ flex: 1, padding: "20px", borderRight: "2px solid #ccc" }}>
-        {/* Wiki for AI Prompts */}
-        <h2>AI Prompt Wiki</h2>
-      </div>
-      <div style={{ flex: 2, padding: "20px" }}>
-        {/* ChatGPT API Integration */}
-        <h2>Chat with GPT-3</h2>
-      </div>
-    </div>
-  );
-}
+const App = () => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggleDropdown = () => {
+        setIsOpen(!isOpen);
+    };
+
+    return (
+        <div className="container">
+            <div className="left-side">
+                <h2>AI Prompt Wiki</h2>
+                <div>
+                    <button onClick={toggleDropdown}>
+                        {isOpen ? 'Hide Categories' : 'Show Categories'}
+                    </button>
+                    {isOpen && (
+                        <div>
+                            <h3>Creating Quizzes</h3>
+                            <ul>
+                                <li>Prompt 1: How to create a simple quiz</li>
+                                <li>Prompt 2: Tips for effective quiz questions</li>
+                            </ul>
+                        </div>
+                    )}
+                </div>
+            </div>
+            <div className="right-side">
+                {/* Other content */}
+            </div>
+        </div>
+    );
+};
 
 export default App;
