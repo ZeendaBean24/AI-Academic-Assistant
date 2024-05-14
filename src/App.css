@@ -5,12 +5,11 @@
   text-align: left;
 }
 
-/* App.css */
-
 .container {
   display: flex;
   width: 90vw;
   height: 90vh; /* Adjust the height as needed */
+  border: 2px solid #ccc; /* Aesthetic vertical line */
 }
 
 .left-title {
@@ -21,6 +20,7 @@
   width: 40%;
   overflow-y: auto; /* Allows scrolling if content is too long */
   border-right: 2px solid #ccc; /* Aesthetic vertical line */
+  padding: 30px;
 }
 
 .right-side {
