@@ -22,8 +22,8 @@ const App = () => {
       const matches = prompt.text.match(/<[^>]+>/g) || [];
       let parts = {};
       matches.forEach((match, index) => {
-          // Use the whole match as a key
-          parts[match] = match.replace(/[<>]/g, '');
+          // Initialize input value as empty and use the text within < > as placeholder
+          parts[match] = '';
       });
       setEditableParts(parts);
     };
@@ -32,14 +32,14 @@ const App = () => {
       const parts = selectedPrompt.split(/(<[^>]+>)/g);
       return parts.map((part, index) => {
           if (part.match(/<[^>]+>/)) {
-              const key = part;
+              const placeholderText = part.replace(/[<>]/g, '');
               return (
                   <input
                       key={index}
                       type="text"
-                      value={editableParts[key]}
-                      onChange={(e) => handleInputChange(key, e.target.value)}
-                      placeholder={`Enter ${editableParts[key]}`}
+                      value={editableParts[part]}
+                      onChange={(e) => handleInputChange(part, e.target.value)}
+                      placeholder={`${placeholderText}`}
                       className="editable-part"
                   />
               );
@@ -70,7 +70,7 @@ const App = () => {
     return (
       <div className="container">
           <div className="left-side">
-              <h2 className='left-title'>AI Prompt Wiki</h2>
+              <h2 className='title'>AI Prompt Wiki</h2>
               <button onClick={toggleDropdown}>
                   {isOpen ? 'Hide Categories' : 'Show Categories'}
               </button>
@@ -91,13 +91,13 @@ const App = () => {
           </div>
           <div className="right-side">
               <div className="top-part">
-                    <h3>Recently Copied Prompts</h3>
+                    <h2 className='title'>Recently Copied Prompts</h2>
                     {copiedPrompts.map((prompt, index) => (
                         <div key={index} className="copied-prompt">{prompt}</div>
                     ))}
               </div>
               <div className="bottom-part">
-                  <h3>Customize Your Prompt</h3>
+                  <h2 className='title'>Customize Your Prompt</h2>
                   <div>{renderPromptWithInputs()}</div>
                   <button onClick={copyPrompt}>Copy Prompt</button>
                   {alertVisible && <div className="alert">Please fill in all required fields.</div>}

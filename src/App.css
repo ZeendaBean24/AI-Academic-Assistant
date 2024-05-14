@@ -12,7 +12,7 @@
   border: 2px solid #ccc; /* Aesthetic vertical line */
 }
 
-.left-title {
+.title {
   text-align: center;
 }
 
@@ -55,7 +55,7 @@
 }
 
 input.editable-part {
-  width: auto;
+  width: 10em;
   margin: 0 2px;
   display: inline-block; /* Display input inline */
 }
