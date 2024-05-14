@@ -12,9 +12,20 @@ const App = () => {
       setIsOpen(!isOpen);
     };
 
+    const [categories, setCategories] = useState({
+      Tests: false,
+      Roleplaying: false
+    });
+  
+    const toggleCategory = (category) => {
+        setCategories(prev => ({ ...prev, [category]: !prev[category] }));
+    };
+
     const prompts = [
-      { id: 1, text: 'How to <create> a simple quiz with <number> questions' },
-      { id: 2, text: 'Tips for effective quiz questions using <topic>' }
+      { id: 1, category: 'Tests', text: 'How to <create> a simple quiz with <number> questions' },
+      { id: 2, category: 'Tests', text: 'Design a multiple-choice <test> with <topic>' },
+      { id: 3, category: 'Roleplaying', text: 'Develop a roleplaying scenario using <scenario>' },
+      { id: 4, category: 'Roleplaying', text: 'Tips for effective character development in <game>' }
     ];
 
     const handlePromptClick = (prompt) => {
@@ -69,26 +80,30 @@ const App = () => {
 
     return (
       <div className="container">
-          <div className="left-side">
-              <h2 className='title'>AI Prompt Wiki</h2>
-              <button onClick={toggleDropdown}>
-                  {isOpen ? 'Hide Categories' : 'Show Categories'}
-              </button>
-              {isOpen && (
-                  <div>
-                      <h3>Creating Quizzes</h3>
-                      {prompts.map((prompt) => (
-                          <div
-                              key={prompt.id}
-                              className="prompt-item"
-                              onClick={() => handlePromptClick(prompt)}
-                          >
-                              {prompt.text}
-                          </div>
-                      ))}
-                  </div>
-              )}
-          </div>
+        <div className="left-side">
+          <h2 className='left-title'>AI Prompt Wiki</h2>
+          {Object.keys(categories).map((category) => (
+              <div key={category}>
+                  <button onClick={() => toggleCategory(category)}>
+                      {categories[category] ? `Hide ${category}` : `Show ${category}`}
+                  </button>
+                  {categories[category] && (
+                      <div>
+                          <h3>{category} Prompts</h3>
+                          {prompts.filter(p => p.category === category).map((prompt) => (
+                              <div
+                                  key={prompt.id}
+                                  className="prompt-item"
+                                  onClick={() => handlePromptClick(prompt)}
+                              >
+                                  {prompt.text}
+                              </div>
+                          ))}
+                      </div>
+                  )}
+              </div>
+          ))}
+        </div>
           <div className="right-side">
               <div className="top-part">
                     <h2 className='title'>Recently Copied Prompts</h2>
