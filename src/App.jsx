@@ -2,15 +2,10 @@ import React, { useState } from 'react';
 import './App.css';
 
 const App = () => {
-    const [isOpen, setIsOpen] = useState(false);
     const [selectedPrompt, setSelectedPrompt] = useState('');
     const [editableParts, setEditableParts] = useState({});
     const [copiedPrompts, setCopiedPrompts] = useState([]);
     const [alertVisible, setAlertVisible] = useState(false);
-
-    const toggleDropdown = () => {
-      setIsOpen(!isOpen);
-    };
 
     const [categories, setCategories] = useState({
       Tests: false,
