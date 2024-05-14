@@ -28,11 +28,26 @@ const App = () => {
       setEditableParts(parts);
     };
 
-    const renderPrompt = (prompt) => {
-      return prompt.replace(/<([^>]+)>/g, (match, p1) => (
-          `<input class="editable-part" type="text" placeholder="Enter ${p1}" />`
-      ));
+    const renderPromptWithInputs = () => {
+      const parts = selectedPrompt.split(/(<[^>]+>)/g);
+      return parts.map((part, index) => {
+          if (part.match(/<[^>]+>/)) {
+              const key = part;
+              return (
+                  <input
+                      key={index}
+                      type="text"
+                      value={editableParts[key]}
+                      onChange={(e) => handleInputChange(key, e.target.value)}
+                      placeholder={`Enter ${editableParts[key]}`}
+                      className="editable-part"
+                  />
+              );
+          }
+          return part;
+      });
     };
+  
 
     const handleInputChange = (key, value) => {
       setEditableParts(prev => ({ ...prev, [key]: value }));
@@ -82,21 +97,11 @@ const App = () => {
                     ))}
               </div>
               <div className="bottom-part">
-                    <h3>Customize Your Prompt</h3>
-                    <div dangerouslySetInnerHTML={{ __html: selectedPrompt }} />
-                    {Object.keys(editableParts).map(key => (
-                        <input
-                            key={key}
-                            type="text"
-                            value={editableParts[key]}
-                            onChange={(e) => handleInputChange(key, e.target.value)}
-                            placeholder={`Enter ${editableParts[key]}`}
-                            className="editable-part"
-                        />
-                    ))}
-                    <button onClick={copyPrompt}>Copy Prompt</button>
-                    {alertVisible && <div className="alert">Please fill in all required fields.</div>}
-                </div>
+                  <h3>Customize Your Prompt</h3>
+                  <div>{renderPromptWithInputs()}</div>
+                  <button onClick={copyPrompt}>Copy Prompt</button>
+                  {alertVisible && <div className="alert">Please fill in all required fields.</div>}
+              </div>
           </div>
       </div>
     );
