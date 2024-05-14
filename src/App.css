@@ -51,6 +51,7 @@
 
 .prompt-item:hover {
   background-color: #e0e0e0; /* Light grey background on hover */
+  color: black;
 }
 
 input.editable-part {
