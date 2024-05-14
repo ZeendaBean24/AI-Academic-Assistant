@@ -12,7 +12,7 @@ const App = () => {
         <div className="container">
             <div className="left-side">
                 <h2 className="left-title">AI Prompt Wiki</h2>
-                <div>
+                <div className="left-content">
                     <button onClick={toggleDropdown}>
                         {isOpen ? 'Hide Categories' : 'Show Categories'}
                     </button>
