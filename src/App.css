@@ -29,5 +29,18 @@
 
 .right-side {
   width: 60%;
+  display: flex;
+  flex-direction: column;
+}
+
+.top-part {
+  height: 40%;
+  padding: 10px;
+  overflow-y: auto; /* Allows scrolling if content is too long */
+}
+
+.bottom-part {
+  height: 60%;
+  padding: 10px;
   overflow-y: auto; /* Allows scrolling if content is too long */
 }
